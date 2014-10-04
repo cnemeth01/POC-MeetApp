@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:compat="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_schedule"
+        android:orderInCategory="100"
+        compat:showAsAction="always"
+        android:title="@string/meet_up_schedule"
+        android:icon="@drawable/schedule"
+        android:layout_width="20dp"/>
+
+    <item
+        android:id="@+id/action_my_schedule"
+        android:orderInCategory="100"
+        compat:showAsAction="always"
+        android:title="My MeetUps"
+        android:icon="@drawable/myschedule"
+        android:layout_width="20dp"/>
+
+    <item
+        android:id="@+id/action_maps"
+        android:orderInCategory="100"
+        compat:showAsAction="always"
+        android:title="@string/places"
+        android:icon="@drawable/places"
+        android:layout_width="20dp"/>
+
+    <item
+        android:id="@+id/action_alerts"
+        android:orderInCategory="100"
+        compat:showAsAction="always"
+        android:title="@string/alerts"
+        android:icon="@drawable/alerts"
+        android:layout_width="20dp"/>
+
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        compat:showAsAction="never"
+        android:title="@string/log_out"
+        />
+
+
+
+</menu>

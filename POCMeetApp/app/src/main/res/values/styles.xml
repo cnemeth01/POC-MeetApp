@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.MeetUp" parent="@style/Theme.AppCompat">
+        <item name="actionBarStyle">@style/ActionBar.Transparent.MeetUp</item>
+        <item name="android:colorBackground">@color/background_body</item>
+    </style>
+
+    <style name="ActionBar.Transparent.MeetUp" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/transparent</item>
+    </style>
+
+</resources>

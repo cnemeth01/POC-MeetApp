@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">POC MeetApp</string>
+    <string name="title_activity_meet_apps">MeetAppsActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="future_meetupps">Future MeetUpps</string>
+    <string name="meetup_scedule">MeetUp Scedule</string>
+    <string name="meetup_history">MeetUp History</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="device_is_not_conected_error_message">Your device is not conected!</string>
+    <string name="meet_up_schedule">MeetUp Schedule</string>
+    <string name="places">Place</string>
+    <string name="log_out">Log out</string>
+    <string name="alerts">alerts</string>
+    <string name="title_activity_place">PlaceActivity</string>
+    <string name="meetup_schedule">MeetUpSchedule</string>
+    <string name="base">Base</string>
+
+</resources>
