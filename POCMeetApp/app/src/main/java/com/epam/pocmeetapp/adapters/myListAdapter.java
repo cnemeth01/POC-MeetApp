@@ -1,17 +1,18 @@
 package com.epam.pocmeetapp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.pojos.MeetUp;
+import com.parse.ParseImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -91,7 +92,7 @@ public class MyListAdapter extends BaseAdapter {
             vh.twDateStar = (TextView) convertView.findViewById(R.id.textViewStar);
             vh.twDateFinish = (TextView) convertView.findViewById(R.id.textViewFinish);
             vh.ivTheme = (ImageView) convertView.findViewById(R.id.imageViewTheme);
-            vh.cbDone = (CheckBox) convertView.findViewById(R.id.cbDone);
+            vh.picture = (ParseImageView) convertView.findViewById(R.id.speaker_photo);
 
             convertView.setTag(vh);
         } else {
@@ -104,6 +105,13 @@ public class MyListAdapter extends BaseAdapter {
         vh.twDateStar.setText("Start: " + startDate);
         String finishDate = sdt.format(items.get(position).getFinish());
         vh.twDateFinish.setText("End: " + finishDate);
+
+        final ParseImageView picture = vh.picture;
+        picture.setParseFile(items.get(position).getSpeakerPicture());
+
+        picture.loadInBackground();
+
+        Log.d("adapter",picture.toString() );
 
         if (items.get(position).getMeetTheme().equals("Android")) {
             vh.ivTheme.setImageDrawable(context.getResources().getDrawable(R.drawable.android));
@@ -120,6 +128,6 @@ public class MyListAdapter extends BaseAdapter {
         private TextView twDateStar;
         private TextView twDateFinish;
         private ImageView ivTheme;
-        private CheckBox cbDone;
+        private ParseImageView picture;
     }
 }

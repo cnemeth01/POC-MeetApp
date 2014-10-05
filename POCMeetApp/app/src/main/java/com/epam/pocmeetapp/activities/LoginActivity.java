@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.epam.pocmeetapp.Parse.ParseHelper;
+import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.interfaces.ParseCallBack;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -361,7 +362,7 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
 
             try {
                 // Simulate network access.
-                Thread.sleep(1000);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 return false;
             }

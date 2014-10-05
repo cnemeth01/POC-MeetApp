@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_body">
+    android:background="@color/background_body"
+    android:orientation="horizontal">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_weight="0.3"
-        android:layout_height="match_parent">
-        <CheckBox
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.parse.ParseImageView
+            android:id="@+id/speaker_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cbDone"
-            android:layout_gravity="center"/>
+            android:background="@drawable/whitecircle"
+            android:paddingBottom="1dp"
+            android:paddingTop="1dp" />
+        />
     </LinearLayout>
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/darker_gray" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:textColor="@android:color/darker_gray"
-        android:id="@+id/textViewTitle" />
+        <TextView
+            android:id="@+id/textViewStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/darker_gray" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:textColor="@android:color/darker_gray"
-        android:id="@+id/textViewStar" />
+        <TextView
+            android:id="@+id/textViewFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:textColor="@android:color/darker_gray"
-        android:id="@+id/textViewFinish" />
-        </LinearLayout>
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="0.6"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
             android:id="@+id/imageViewTheme"
-            android:src="@drawable/ios"/>
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:src="@drawable/ios" />
     </LinearLayout>
 
 </LinearLayout>

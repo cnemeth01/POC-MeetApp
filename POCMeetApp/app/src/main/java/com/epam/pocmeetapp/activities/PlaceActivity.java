@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.epam.pocmeetapp.R;
 
-public class PlaceActivity extends BaseActivity {
+
+public class
+        PlaceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

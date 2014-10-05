@@ -12,13 +12,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 
+import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.fragments.ScheduleFragment;
 
 /**
  * Created by Csaba_Bela_Nemeth on 10/2/2014.
  */
-public class MainScheduleActivity extends BaseActivity implements ActionBar.TabListener {
+public class
+        MainScheduleActivity extends BaseActivity implements ActionBar.TabListener {
 
+    public static final String SCHEDULE_TYPE = "schedule";
     private MySectionsPagerAdapter mySectionsPagerAdapter;
     private ViewPager sectionsViewPager;
     private ActionBar actionBar;
@@ -97,7 +100,7 @@ public class MainScheduleActivity extends BaseActivity implements ActionBar.TabL
 
             Fragment fragment = new ScheduleFragment();
             Bundle args = new Bundle();
-            args.putInt("schedule", i);
+            args.putInt(SCHEDULE_TYPE, i);
             fragment.setArguments(args);
             return fragment;
 

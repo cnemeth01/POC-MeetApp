@@ -1,6 +1,7 @@
 package com.epam.pocmeetapp.pojos;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class MeetUp extends ParseObject {
     private String meetUpTitle;
     private Date start;
     private Date finish;
-    private byte[] meetUpBytes;
+    private ParseFile speakerPicture;
 
     public String getMeetUpId() {
         return getString("objectId");
@@ -62,13 +63,13 @@ public class MeetUp extends ParseObject {
         put("Finish", finish);
     }
 
-    public byte[] getMeetUpBytes() {
+    public ParseFile getSpeakerPicture() {
 
-        return getBytes("Picture");
+        return getParseFile("Picture");
     }
 
-    public void setMeetUpBytes(byte[] meetUpBytes) {
+    public void setSpeakerPicture(ParseFile speakerPicture) {
 
-        put("Picture", meetUpBytes);
+        put("Picture", speakerPicture);
     }
 }

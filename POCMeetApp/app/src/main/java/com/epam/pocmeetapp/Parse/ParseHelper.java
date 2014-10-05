@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.epam.pocmeetapp.activities.MeetAppsActivity;
+import com.epam.pocmeetapp.activities.MainScheduleActivity;
 import com.epam.pocmeetapp.interfaces.ParseCallBack;
 import com.epam.pocmeetapp.pojos.MeetUp;
 import com.parse.FindCallback;
@@ -65,7 +65,7 @@ public class ParseHelper {
         ParseACL.setDefaultACL(defaultACL, true);
 
         ParseAnalytics.trackAppOpened(intent);
-        PushService.setDefaultPushCallback(context, MeetAppsActivity.class);
+        PushService.setDefaultPushCallback(context, MainScheduleActivity.class);
         ParseObject.registerSubclass(MeetUp.class);
     }
 

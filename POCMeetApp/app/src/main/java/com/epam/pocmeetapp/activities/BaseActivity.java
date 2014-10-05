@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.epam.pocmeetapp.R;
+
 
 public class BaseActivity extends ActionBarActivity {
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MeetUp" parent="@style/Theme.AppCompat">
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle</item>
+    </style>
+
+    <style name="ActionBar.Transparent" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/transparent</item>
+    </style>
+    
+     <style name="ActionBarTabStyle" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:height">200dip</item>
+    </style>
+    
+
+</resources>

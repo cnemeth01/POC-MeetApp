@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ScaleImageView">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/libs/ScaleImageView.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
