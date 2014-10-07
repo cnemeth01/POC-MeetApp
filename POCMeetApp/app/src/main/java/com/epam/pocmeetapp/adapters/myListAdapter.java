@@ -1,6 +1,8 @@
 package com.epam.pocmeetapp.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epam.pocmeetapp.Parse.ParseHelper;
 import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.pojos.MeetUp;
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
 import com.parse.ParseImageView;
 
 import java.text.SimpleDateFormat;
@@ -79,7 +84,7 @@ public class MyListAdapter extends BaseAdapter {
     };
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder vh = null;
         if (convertView == null) {
@@ -108,10 +113,14 @@ public class MyListAdapter extends BaseAdapter {
 
         final ParseImageView picture = vh.picture;
         picture.setParseFile(items.get(position).getSpeakerPicture());
+        picture.loadInBackground(new GetDataCallback() {
+            @Override
+            public void done(byte[] bytes, ParseException e) {
+                //notifyDataSetChanged();
+            }
+        });
 
-        picture.loadInBackground();
-
-        Log.d("adapter",picture.toString() );
+        //Log.d("adapter",picture.toString() );
 
         if (items.get(position).getMeetTheme().equals("Android")) {
             vh.ivTheme.setImageDrawable(context.getResources().getDrawable(R.drawable.android));

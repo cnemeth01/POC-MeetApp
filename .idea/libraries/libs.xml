@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/android/libs/Parse-1.4.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/android/libs/ScaleImageView.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/android/libs/YouTubeAndroidPlayerApi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

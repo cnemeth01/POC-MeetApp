@@ -2,12 +2,15 @@ package com.epam.pocmeetapp.Parse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.epam.pocmeetapp.activities.MainScheduleActivity;
 import com.epam.pocmeetapp.interfaces.ParseCallBack;
 import com.epam.pocmeetapp.pojos.MeetUp;
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
@@ -43,11 +46,9 @@ public class ParseHelper {
             public void done(List<MeetUp> scoreList, ParseException e) {
                 if (e == null) {
                     Log.d("score", "Retrieved " + scoreList.size() + " scores");
-                    for (MeetUp meetUp : scoreList) {
-                        meetUpList.clear();
-                        meetUpList.addAll(scoreList);
-                        mListener.parseQueryDone();
-                    }
+                    meetUpList.clear();
+                    meetUpList.addAll(scoreList);
+                    mListener.parseQueryDone();
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
