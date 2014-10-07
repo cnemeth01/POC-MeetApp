@@ -51,8 +51,7 @@ public class
 
             @Override
             public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                actionBar.setSelectedNavigationItem(position);
+                  actionBar.setSelectedNavigationItem(position);
             }
         });
 

@@ -58,6 +58,8 @@ public class BaseActivity extends ActionBarActivity {
 
             case R.id.action_my_schedule:
 
+
+
                 break;
 
             case R.id.action_maps:

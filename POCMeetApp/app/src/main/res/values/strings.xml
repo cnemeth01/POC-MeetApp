@@ -18,5 +18,7 @@
     <string name="title_activity_place">PlaceActivity</string>
     <string name="meetup_schedule">MeetUpSchedule</string>
     <string name="base">Base</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="search">Search</string>
 
 </resources>

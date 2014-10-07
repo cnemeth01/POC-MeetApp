@@ -45,6 +45,7 @@
             android:name=".activities.MainScheduleActivity"
             android:label="@string/meetup_schedule" >
         </activity>
+
         <service android:name="com.parse.PushService" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver" >
@@ -76,8 +77,9 @@
 
         <service android:name="com.parse.PushService" />
 
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
@@ -85,6 +87,10 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".activities.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
