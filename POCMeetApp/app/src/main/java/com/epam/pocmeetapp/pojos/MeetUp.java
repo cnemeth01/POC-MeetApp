@@ -1,10 +1,10 @@
 package com.epam.pocmeetapp.pojos;
 
 import com.parse.ParseClassName;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Csaba_Bela_Nemeth on 9/29/2014.
@@ -12,20 +12,16 @@ import java.util.Date;
 @ParseClassName("MeetUp")
 public class MeetUp extends ParseObject {
 
-    private String MeetUpId;
+    private String objectId;
     private String meetTheme;
     private String meetUpTitle;
     private Date start;
     private Date finish;
-    private ParseFile speakerPicture;
+    private String speakerId;
+    private List<String> participants;
 
-    public String getMeetUpId() {
+    public String getObjectId() {
         return getString("objectId");
-    }
-
-    public void setMeetUpId(String meetUpId) {
-
-        put("objectId", meetUpId);
     }
 
     public String getMeetTheme() {
@@ -63,13 +59,18 @@ public class MeetUp extends ParseObject {
         put("Finish", finish);
     }
 
-    public ParseFile getSpeakerPicture() {
+    public String getSpeakerId() {
 
-        return getParseFile("Picture");
+        return getString("speakerId");
+    }
+    public List<String> getParticipannts() {
+
+        return getList("participants");
     }
 
-    public void setSpeakerPicture(ParseFile speakerPicture) {
-
-        put("Picture", speakerPicture);
+    public void addParticipant(String participantId){
+        put("participants",participantId);
     }
+
+
 }

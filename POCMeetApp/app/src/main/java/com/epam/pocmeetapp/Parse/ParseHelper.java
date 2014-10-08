@@ -2,15 +2,13 @@ package com.epam.pocmeetapp.Parse;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.epam.pocmeetapp.activities.MainScheduleActivity;
 import com.epam.pocmeetapp.interfaces.ParseCallBack;
 import com.epam.pocmeetapp.pojos.MeetUp;
+import com.epam.pocmeetapp.pojos.Participant;
 import com.parse.FindCallback;
-import com.parse.GetDataCallback;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
@@ -30,6 +28,8 @@ public class ParseHelper {
     private Context context;
     private ParseCallBack mListener;
     public static final List<MeetUp> meetUpList = new ArrayList<MeetUp>();
+    public static final List<Participant> participantList = new ArrayList<Participant>();
+
 
     public ParseHelper(Context context,ParseCallBack mListener) {
         this.context = context;
@@ -48,12 +48,48 @@ public class ParseHelper {
                     Log.d("score", "Retrieved " + scoreList.size() + " scores");
                     meetUpList.clear();
                     meetUpList.addAll(scoreList);
+
                     mListener.parseQueryDone();
+                    if (participantList == null) {
+                        getParticipiants();
+                    }
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
             }
         });
+    }
+
+    private void getParticipiants() {
+        ParseQuery<Participant> query = ParseQuery.getQuery(Participant.class);
+        query.orderByAscending("Theme");
+        query.findInBackground(new FindCallback<Participant>() {
+            public void done(List<Participant> scoreList, ParseException e) {
+                if (e == null) {
+                    Log.d("score", "participiants Retrieved  " + scoreList.size() + " scores");
+                    participantList.clear();
+                    participantList.addAll(scoreList);
+
+                        addParticipiants();
+
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
+    }
+
+    private void addParticipiants() {
+        for (MeetUp meetUp : meetUpList) {
+            for (Participant participant : participantList) {
+                meetUp.addParticipant(participant.getObjectId());
+            }
+
+        }
+
+
     }
 
     public void initParse(Intent intent) {

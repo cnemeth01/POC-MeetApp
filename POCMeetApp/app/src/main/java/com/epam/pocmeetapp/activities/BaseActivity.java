@@ -56,11 +56,12 @@ public class BaseActivity extends ActionBarActivity {
                 }
                 break;
 
-            case R.id.action_my_schedule:
-
-
-
-                break;
+            case R.id.action_search: {
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivityForResult(intent, 0);
+                finish();
+            }
+            break;
 
             case R.id.action_maps:
                 if (!(this instanceof PlaceActivity)) {
@@ -75,7 +76,7 @@ public class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 finish();
                 break;
-      }
+        }
 
 
         return super.onOptionsItemSelected(item);

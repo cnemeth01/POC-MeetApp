@@ -1,9 +1,6 @@
 package com.epam.pocmeetapp.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.epam.pocmeetapp.Parse.ParseHelper;
 import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.pojos.MeetUp;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseImageView;
 
 import java.text.SimpleDateFormat;
@@ -111,14 +105,14 @@ public class MyListAdapter extends BaseAdapter {
         String finishDate = sdt.format(items.get(position).getFinish());
         vh.twDateFinish.setText("End: " + finishDate);
 
-        final ParseImageView picture = vh.picture;
-        picture.setParseFile(items.get(position).getSpeakerPicture());
-        picture.loadInBackground(new GetDataCallback() {
-            @Override
-            public void done(byte[] bytes, ParseException e) {
-                //notifyDataSetChanged();
-            }
-        });
+//        final ParseImageView picture = vh.picture;
+//        picture.setParseFile(items.get(position).getSpeakerId());
+//        picture.loadInBackground(new GetDataCallback() {
+//            @Override
+//            public void done(byte[] bytes, ParseException e) {
+//                //notifyDataSetChanged();
+//            }
+//        });
 
         //Log.d("adapter",picture.toString() );
 

@@ -12,11 +12,11 @@
         android:layout_width="20dp"/>
 
     <item
-        android:id="@+id/action_my_schedule"
+        android:id="@+id/action_search"
         android:orderInCategory="100"
         compat:showAsAction="always"
-        android:title="My MeetUps"
-        android:icon="@drawable/myschedule"
+        android:title="Search"
+        android:icon="@drawable/search"
         android:layout_width="20dp"/>
 
     <item
