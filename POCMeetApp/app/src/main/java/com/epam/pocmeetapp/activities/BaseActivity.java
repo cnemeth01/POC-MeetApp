@@ -59,7 +59,6 @@ public class BaseActivity extends ActionBarActivity {
             case R.id.action_search: {
                 Intent intent = new Intent(this, SearchActivity.class);
                 startActivityForResult(intent, 0);
-                finish();
             }
             break;
 

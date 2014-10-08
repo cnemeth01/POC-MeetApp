@@ -22,7 +22,7 @@
     <string name="search">Search</string>
 
     <string-array name="search_categorys">
-        <item>MeetUpp</item>
+        <item>MeetUp</item>
         <item>Participant</item>
 
     </string-array>

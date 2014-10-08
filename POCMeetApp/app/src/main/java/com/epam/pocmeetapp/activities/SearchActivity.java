@@ -16,7 +16,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.epam.pocmeetapp.R;
+import com.epam.pocmeetapp.pojos.MeetUp;
+import com.epam.pocmeetapp.pojos.Speakers;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -59,7 +62,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         searchResultList = (ListView) findViewById(R.id.listViewSearch);
 
         results = new ArrayList<String>();
-        simpleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, results);
+        simpleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         searchResultList.setAdapter(simpleAdapter);
         spinner = (Spinner) findViewById(R.id.spinnerSearchCategory);
         editTextSearchFieldOne = (EditText) findViewById(R.id.edittextSearch);
@@ -70,12 +73,6 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (editTextSearchFieldOne.getText().length() > 0) {
-
-
-                }
-
                 searchParseQuerys();
             }
         });
@@ -92,7 +89,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         try {
-                            String simpleDate = year + "-" + monthOfYear + "-" + dayOfMonth;
+                            String simpleDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             fromDate = sdf.parse(simpleDate);
                             buttonDateFrom.setText(simpleDate);
                         } catch (ParseException e) {
@@ -118,7 +115,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         try {
-                            String simpleDate = year + "-" + monthOfYear + "-" + dayOfMonth;
+                            String simpleDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             toDate = sdf.parse(simpleDate);
                             buttonDateTo.setText(simpleDate);
                         } catch (ParseException e) {
@@ -158,21 +155,36 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
     }
 
     public void searchParseQuerys() {
-        progress =ProgressDialog.show(SearchActivity.this, "Please wait ...", "Downloading ...", true);
+        progress = ProgressDialog.show(SearchActivity.this, "Please wait ...", "Downloading ...", true);
 
+        Log.d("SEARCH", "FROM" + fromDate.toString());
+        Log.d("SEARCH", "TO" + toDate.toString());
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(searchCategory);
-        query.whereLessThan("Start", fromDate);
-        query.whereGreaterThan("Finish", toDate);
+
+        if (editTextSearchFieldOne.getText().length() > 0) {
+            Log.d("Filter :", "."+editTextSearchFieldOne.getText().toString()+".");
+            query.whereContains("Title", editTextSearchFieldOne.getText().toString().trim());
+        }
+
+        query.whereGreaterThan("Start", fromDate);
+        query.whereLessThan("Start", toDate);
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> scoreList,com.parse.ParseException e) {
                 if (e == null) {
-                    progress.dismiss();
-                    for (ParseObject parseObject : scoreList) {
-                        simpleAdapter.add(parseObject.getString("Theme"));
+                    if (scoreList != null)
+                        Log.d("score", scoreList.size()+" results.");
+                    else
+                        Log.d("score", "No results!");
 
+                    progress.dismiss();
+                    simpleAdapter.clear();
+                    results.clear();
+                    for (ParseObject parseObject : scoreList) {
+                        simpleAdapter.add(parseObject.getString("Title"));
+                        results.add(parseObject.getObjectId());
                     }
                    simpleAdapter.notifyDataSetChanged();
                 } else {

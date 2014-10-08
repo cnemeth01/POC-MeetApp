@@ -8,6 +8,7 @@ import com.epam.pocmeetapp.activities.MainScheduleActivity;
 import com.epam.pocmeetapp.interfaces.ParseCallBack;
 import com.epam.pocmeetapp.pojos.MeetUp;
 import com.epam.pocmeetapp.pojos.Participant;
+import com.epam.pocmeetapp.pojos.Speakers;
 import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
@@ -50,9 +51,9 @@ public class ParseHelper {
                     meetUpList.addAll(scoreList);
 
                     mListener.parseQueryDone();
-                    if (participantList == null) {
-                        getParticipiants();
-                    }
+                    //if (participantList.isEmpty()) {
+                    //    getParticipiants();
+                    //}
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -70,7 +71,7 @@ public class ParseHelper {
                     participantList.clear();
                     participantList.addAll(scoreList);
 
-                        addParticipiants();
+                    addParticipiants();
 
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
@@ -83,13 +84,13 @@ public class ParseHelper {
 
     private void addParticipiants() {
         for (MeetUp meetUp : meetUpList) {
-            for (Participant participant : participantList) {
-                meetUp.addParticipant(participant.getObjectId());
-            }
+            //for (Participant participant : participantList) {
+            //    meetUp.addParticipant(participant);
+            //}
 
+            meetUp.put("participants", participantList);
+            meetUp.saveInBackground();
         }
-
-
     }
 
     public void initParse(Intent intent) {
@@ -104,6 +105,9 @@ public class ParseHelper {
         ParseAnalytics.trackAppOpened(intent);
         PushService.setDefaultPushCallback(context, MainScheduleActivity.class);
         ParseObject.registerSubclass(MeetUp.class);
+        ParseObject.registerSubclass(Participant.class);
+        ParseObject.registerSubclass(Speakers.class);
+
     }
 
 

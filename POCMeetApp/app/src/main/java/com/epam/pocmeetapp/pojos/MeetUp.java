@@ -68,8 +68,8 @@ public class MeetUp extends ParseObject {
         return getList("participants");
     }
 
-    public void addParticipant(String participantId){
-        put("participants",participantId);
+    public void addParticipant(Participant participant){
+        put("participants", participant);
     }
 
 

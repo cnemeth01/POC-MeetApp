@@ -1,11 +1,13 @@
 package com.epam.pocmeetapp.pojos;
 
+import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 /**
  * Created by Csaba_Bela_Nemeth on 10/8/2014.
  */
+@ParseClassName("Speakers")
 public class Speakers extends ParseObject {
 
 
