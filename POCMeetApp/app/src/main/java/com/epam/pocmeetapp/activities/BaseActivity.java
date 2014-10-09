@@ -66,7 +66,7 @@ public class BaseActivity extends ActionBarActivity {
                 if (!(this instanceof PlaceActivity)) {
                     Intent intent = new Intent(this, PlaceActivity.class);
                     startActivityForResult(intent, 0);
-                    finish();
+
                 }
                 break;
 

@@ -58,6 +58,15 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
     private void initView() {
         searchResultList = (ListView) findViewById(R.id.listViewSearch);
+        String simpleDateTo = "2015-12-24";
+        String simpleDateFrom="2010-12-24";
+        try {
+            toDate=sdf.parse(simpleDateTo);
+            fromDate=sdf.parse(simpleDateFrom);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         results = new ArrayList<String>();
         simpleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
@@ -66,7 +75,9 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         editTextSearchFieldOne = (EditText) findViewById(R.id.edittextSearch);
         buttonSearch = (Button) findViewById(R.id.buttonSearch);
         buttonDateFrom = (Button) findViewById(R.id.buttonDateFrom);
+        buttonDateFrom.setText(simpleDateFrom);
         buttonDateTo = (Button) findViewById(R.id.buttonDateTo);
+        buttonDateTo.setText(simpleDateTo);
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +89,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
             @Override
             public void onClick(View v) {
-                createDatePickerDialog(SEARCH_DATE_TO);
+                createDatePickerDialog(0);
             }
         });
         buttonDateTo.setOnClickListener(new View.OnClickListener() {
@@ -115,10 +126,10 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
                         toDate = sdf.parse(simpleDate);
                         buttonDateTo.setText(simpleDate);
 
-                    } else
+                    } else {
                         fromDate = sdf.parse(simpleDate);
-                    buttonDateFrom.setText(simpleDate);
-
+                        buttonDateFrom.setText(simpleDate);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
