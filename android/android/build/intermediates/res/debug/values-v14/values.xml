@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/zszabo/POC-Meetapp/android/android/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/src/main/res/values-v14/styles.xml -->
     <eat-comment />
 
     <style name="ActionBar.Transparent.f8" parent="@style/Widget.AppCompat.ActionBar">
@@ -12,7 +12,7 @@
         <item name="android:background">@color/transparent</item>
         <item name="android:height">200dip</item>
     </style>
-    <!-- From: file:/Users/zszabo/POC-Meetapp/android/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0-rc1/res/values-v14/values.xml -->
+    <!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0-rc1/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="TextAppearance.AppCompat.Base.SearchResult.Subtitle" parent="@android:TextAppearance.Holo.SearchResult.Subtitle" />
@@ -195,14 +195,14 @@
     <style name="Theme.Platform.AppCompat.Light.DarkActionBar" parent="android:Theme.Holo.Light.DarkActionBar" />
 
     <style name="Theme.Platform.AppCompat.Light.DialogWhenLarge" parent="android:Theme.Holo.Light.DialogWhenLarge" />
-    <!-- From: file:/Users/zszabo/POC-Meetapp/android/android/src/main/res/values-v14/styles.xml -->
+    <!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/src/main/res/values-v14/styles.xml -->
     <eat-comment />
 
     <style name="Theme.f8" parent="@style/Theme.AppCompat">
         <item name="android:actionBarStyle">@style/ActionBar.Transparent.f8</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.f8</item>
     </style>
-    <!-- From: file:/Users/zszabo/POC-Meetapp/android/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0-rc1/res/values-v14/values.xml -->
+    <!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0-rc1/res/values-v14/values.xml -->
     <eat-comment />
 
     <style name="Widget.AppCompat.Base.ActionBar" parent="android:Widget.Holo.ActionBar" />

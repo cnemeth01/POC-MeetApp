@@ -21,4 +21,4 @@
           android:drawable="@drawable/com_facebook_button_grey_focused" />
     <item android:drawable="@drawable/com_facebook_button_grey_normal" />
 </selector>
-<!-- From: file:/Users/zszabo/POC-Meetapp/android/facebook/src/main/res/drawable/com_facebook_loginbutton_silver.xml --><!-- From: file:/Users/zszabo/POC-Meetapp/android/android/build/intermediates/exploded-aar/android/facebook/unspecified/res/drawable/com_facebook_loginbutton_silver.xml -->
+<!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/facebook/src/main/res/drawable/com_facebook_loginbutton_silver.xml --><!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/build/intermediates/exploded-aar/android/facebook/unspecified/res/drawable/com_facebook_loginbutton_silver.xml -->

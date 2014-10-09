@@ -4,4 +4,4 @@
           android:state_pressed="true" />
     <item android:drawable="@drawable/fblogin" />
 </selector>
-<!-- From: file:/Users/zszabo/POC-Meetapp/android/android/src/main/res/drawable/button_login.xml -->
+<!-- From: file:/C:/Users/Németh%20Csaba/Documents/POC%20MeetApp/android/android/src/main/res/drawable/button_login.xml -->

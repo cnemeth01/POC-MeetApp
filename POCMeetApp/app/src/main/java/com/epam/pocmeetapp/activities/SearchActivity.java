@@ -16,10 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.epam.pocmeetapp.R;
-import com.epam.pocmeetapp.pojos.MeetUp;
-import com.epam.pocmeetapp.pojos.Speakers;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -33,6 +30,7 @@ import static android.widget.AdapterView.OnItemSelectedListener;
 
 public class SearchActivity extends Activity implements OnItemSelectedListener {
 
+    public static final int SEARCH_DATE_TO = 1;
     private EditText editTextSearchFieldOne;
     private EditText editTextSearchFieldTwo;
     private Button buttonSearch;
@@ -78,55 +76,19 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         });
         buttonDateFrom.setOnClickListener(new View.OnClickListener() {
 
-            int year = 2014;
-            int month = 0;
-            int day = 0;
-
             @Override
             public void onClick(View v) {
-
-                DatePickerDialog datepicker = new DatePickerDialog(SearchActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        try {
-                            String simpleDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                            fromDate = sdf.parse(simpleDate);
-                            buttonDateFrom.setText(simpleDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, year, month, day);
-
-                datepicker.setTitle("Set from Date");
-                datepicker.show();
+                createDatePickerDialog(SEARCH_DATE_TO);
             }
         });
         buttonDateTo.setOnClickListener(new View.OnClickListener() {
 
-            int year = 2014;
-            int month = 0;
-            int day = 0;
-
             @Override
             public void onClick(View v) {
 
-                DatePickerDialog datepicker = new DatePickerDialog(SearchActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        try {
-                            String simpleDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                            toDate = sdf.parse(simpleDate);
-                            buttonDateTo.setText(simpleDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, year, month, day);
-
-                datepicker.setTitle("Set from Date");
-                datepicker.show();
+                createDatePickerDialog(SEARCH_DATE_TO);
             }
+
         });
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -136,6 +98,35 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    private void createDatePickerDialog(final int serchtype) {
+
+        int year = 2014;
+        int month = 0;
+        int day = 0;
+
+        DatePickerDialog datepicker = new DatePickerDialog(SearchActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                try {
+                    String simpleDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                    if (serchtype == SEARCH_DATE_TO) {
+                        toDate = sdf.parse(simpleDate);
+                        buttonDateTo.setText(simpleDate);
+
+                    } else
+                        fromDate = sdf.parse(simpleDate);
+                    buttonDateFrom.setText(simpleDate);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, year, month, day);
+
+        datepicker.setTitle("Set from Date");
+        datepicker.show();
     }
 
 
@@ -163,7 +154,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(searchCategory);
 
         if (editTextSearchFieldOne.getText().length() > 0) {
-            Log.d("Filter :", "."+editTextSearchFieldOne.getText().toString()+".");
+            Log.d("Filter :", "." + editTextSearchFieldOne.getText().toString() + ".");
             query.whereContains("Title", editTextSearchFieldOne.getText().toString().trim());
         }
 
@@ -172,10 +163,10 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> scoreList,com.parse.ParseException e) {
+            public void done(List<ParseObject> scoreList, com.parse.ParseException e) {
                 if (e == null) {
                     if (scoreList != null)
-                        Log.d("score", scoreList.size()+" results.");
+                        Log.d("score", scoreList.size() + " results.");
                     else
                         Log.d("score", "No results!");
 
@@ -186,7 +177,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
                         simpleAdapter.add(parseObject.getString("Title"));
                         results.add(parseObject.getObjectId());
                     }
-                   simpleAdapter.notifyDataSetChanged();
+                    simpleAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
