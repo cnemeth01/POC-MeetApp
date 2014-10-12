@@ -11,6 +11,15 @@ import com.parse.ParseObject;
 public class Comments extends ParseObject {
 
     private String authorId;
+    private String comment;
+
+    public String getComment() {
+        return getString("comment");
+    }
+
+    public void setComment(String comment) {
+        put("comment",comment);
+    }
 
     public String getAuthorId() {
         return getString("authorId");

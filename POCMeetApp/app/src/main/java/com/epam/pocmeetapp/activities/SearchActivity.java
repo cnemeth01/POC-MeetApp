@@ -2,8 +2,10 @@ package com.epam.pocmeetapp.activities;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +16,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.epam.pocmeetapp.R;
 import com.epam.pocmeetapp.pojos.MeetUp;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -48,6 +48,8 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
     private List<String> results;
     private ArrayAdapter<String> simpleAdapter;
     private ProgressDialog progress;
+    private String[] message;
+    private List<MeetUp> myScoreList;
 
 
     @Override
@@ -80,27 +82,27 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
             int push = 0;
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                push++;
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("MeetUp");
-                query.getInBackground(results.get(position), new GetCallback<ParseObject>() {
+            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+//           This query find all Comments objects which are connected to a concrete MeetUp
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Comments");
+                query.whereEqualTo("parent", myScoreList.get(position));
+                query.findInBackground(new FindCallback<ParseObject>() {
+
                     @Override
-                    public void done(ParseObject parseObject, com.parse.ParseException e) {
-                        if (e == null) {
-                            Log.d("done comment query", parseObject.getString("Title")+ " and results(position):" +results.get(position) );
-                            ParseObject myComment = new ParseObject("Comments");
-                            myComment.put("comment", "Hello comment " + push);
-                            myComment.put("parent", ParseObject.createWithoutData("MeetUp",results.get(position)));
-                            myComment.saveInBackground();
-                        } else {
-                            System.out.println("e");
+                    public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
+                        message = new String[parseObjects.size()];
+                        int i = 0;
+                        for (ParseObject object : parseObjects) {
+                            message[i] = (object.getString("comment"));
+                            i++;
                         }
 
+                        createDialogWithbButtons();
                     }
                 });
 
-
-               Toast.makeText(SearchActivity.this, "Comment save on " + results.get(position) + "the comment is: Hello comment" + push, Toast.LENGTH_SHORT).show();
             }
         });
         spinner = (Spinner) findViewById(R.id.spinnerSearchCategory);
@@ -141,6 +143,28 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    private void createDialogWithbButtons() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle(("Comments:"));
+        ab.setItems(message, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        android.content.DialogInterface.OnClickListener mylistener = new android.content.DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (DialogInterface.BUTTON_POSITIVE == which) {
+                    dialog.dismiss();
+                }
+
+            }
+        };
+        ab.setPositiveButton("Ok", mylistener);
+        ab.create().show();
     }
 
     private void createDatePickerDialog(final int serchtype) {
@@ -204,15 +228,18 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         query.whereGreaterThan("Start", fromDate);
         query.whereLessThan("Start", toDate);
 
+        myScoreList = new ArrayList<MeetUp>();
+
         query.findInBackground(new FindCallback<MeetUp>() {
             @Override
             public void done(List<MeetUp> scoreList, com.parse.ParseException e) {
                 if (e == null) {
-                    if (scoreList != null)
+                    if (scoreList != null) {
                         Log.d("score", scoreList.size() + " results.");
-                    else
+                        myScoreList.addAll(scoreList);
+                    } else {
                         Log.d("score", "No results!");
-
+                    }
                     progress.dismiss();
                     simpleAdapter.clear();
                     System.out.println(scoreList.toString());
