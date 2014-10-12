@@ -17,12 +17,10 @@ public class MeetUp extends ParseObject {
     private String meetUpTitle;
     private Date start;
     private Date finish;
-    private String speakerId;
+    private Speakers speaker;
     private List<String> participants;
+    private List<Comments> comment;
 
-    public String getObjectId() {
-        return getString("objectId");
-    }
 
     public String getMeetTheme() {
         return getString("Theme");
@@ -59,16 +57,23 @@ public class MeetUp extends ParseObject {
         put("Finish", finish);
     }
 
-    public String getSpeakerId() {
+    public void addSpeaker(String speakerId) {
+        put("speaker", speakerId);
 
-        return getString("speakerId");
     }
+
+
+    public Speakers getSpeaker() {
+
+        return getSpeaker();
+    }
+
     public List<String> getParticipannts() {
 
         return getList("participants");
     }
 
-    public void addParticipant(Participant participant){
+    public void addParticipant(Participant participant) {
         put("participants", participant);
     }
 

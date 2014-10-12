@@ -43,6 +43,7 @@ public class ParseHelper {
 
         ParseQuery<MeetUp> query = ParseQuery.getQuery(MeetUp.class);
         query.orderByAscending("Theme");
+
         query.findInBackground(new FindCallback<MeetUp>() {
             public void done(List<MeetUp> scoreList, ParseException e) {
                 if (e == null) {
@@ -60,6 +61,8 @@ public class ParseHelper {
             }
         });
     }
+
+
 
     private void getParticipiants() {
         ParseQuery<Participant> query = ParseQuery.getQuery(Participant.class);

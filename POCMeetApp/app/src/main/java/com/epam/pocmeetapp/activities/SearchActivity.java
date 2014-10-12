@@ -14,9 +14,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.epam.pocmeetapp.R;
+import com.epam.pocmeetapp.pojos.MeetUp;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -59,10 +62,10 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
     private void initView() {
         searchResultList = (ListView) findViewById(R.id.listViewSearch);
         String simpleDateTo = "2015-12-24";
-        String simpleDateFrom="2010-12-24";
+        String simpleDateFrom = "2010-12-24";
         try {
-            toDate=sdf.parse(simpleDateTo);
-            fromDate=sdf.parse(simpleDateFrom);
+            toDate = sdf.parse(simpleDateTo);
+            fromDate = sdf.parse(simpleDateFrom);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -71,6 +74,35 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         results = new ArrayList<String>();
         simpleAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         searchResultList.setAdapter(simpleAdapter);
+
+        searchResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            int push = 0;
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                push++;
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("MeetUp");
+                query.getInBackground(results.get(position), new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject parseObject, com.parse.ParseException e) {
+                        if (e == null) {
+                            Log.d("done comment query", parseObject.getString("Title")+ " and results(position):" +results.get(position) );
+                            ParseObject myComment = new ParseObject("Comments");
+                            myComment.put("comment", "Hello comment " + push);
+                            myComment.put("parent", ParseObject.createWithoutData("MeetUp",results.get(position)));
+                            myComment.saveInBackground();
+                        } else {
+                            System.out.println("e");
+                        }
+
+                    }
+                });
+
+
+               Toast.makeText(SearchActivity.this, "Comment save on " + results.get(position) + "the comment is: Hello comment" + push, Toast.LENGTH_SHORT).show();
+            }
+        });
         spinner = (Spinner) findViewById(R.id.spinnerSearchCategory);
         editTextSearchFieldOne = (EditText) findViewById(R.id.edittextSearch);
         buttonSearch = (Button) findViewById(R.id.buttonSearch);
@@ -162,7 +194,7 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         Log.d("SEARCH", "FROM" + fromDate.toString());
         Log.d("SEARCH", "TO" + toDate.toString());
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(searchCategory);
+        ParseQuery<MeetUp> query = ParseQuery.getQuery(MeetUp.class);
 
         if (editTextSearchFieldOne.getText().length() > 0) {
             Log.d("Filter :", "." + editTextSearchFieldOne.getText().toString() + ".");
@@ -172,9 +204,9 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
         query.whereGreaterThan("Start", fromDate);
         query.whereLessThan("Start", toDate);
 
-        query.findInBackground(new FindCallback<ParseObject>() {
+        query.findInBackground(new FindCallback<MeetUp>() {
             @Override
-            public void done(List<ParseObject> scoreList, com.parse.ParseException e) {
+            public void done(List<MeetUp> scoreList, com.parse.ParseException e) {
                 if (e == null) {
                     if (scoreList != null)
                         Log.d("score", scoreList.size() + " results.");
@@ -183,10 +215,13 @@ public class SearchActivity extends Activity implements OnItemSelectedListener {
 
                     progress.dismiss();
                     simpleAdapter.clear();
+                    System.out.println(scoreList.toString());
                     results.clear();
-                    for (ParseObject parseObject : scoreList) {
-                        simpleAdapter.add(parseObject.getString("Title"));
+                    for (MeetUp parseObject : scoreList) {
                         results.add(parseObject.getObjectId());
+                        simpleAdapter.add(parseObject.getMeetUpTitle());
+
+
                     }
                     simpleAdapter.notifyDataSetChanged();
                 } else {
